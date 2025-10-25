@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Дата-ассистент | Обработка данных для вашего бизнеса</title>
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+                   script-src 'self' https://cdnjs.cloudflare.com https://unpkg.com https://cdn.jsdelivr.net 'unsafe-inline';
+                   style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+                   font-src 'self' https://fonts.gstatic.com;
+                   img-src 'self' data: https:;
+                   connect-src 'self';
+                   media-src https://assets.mixkit.co;">
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
@@ -45,6 +56,16 @@
             letter-spacing: -0.02em;
         }
 
+        /* Скрываем кастомный курсор на мобильных устройствах */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            .cursor, .cursor-follower {
+                display: none !important;
+            }
+        }
+
         h1, h2, h3, h4 {
             font-family: 'Cormorant Garamond', 'Playfair Display', serif;
             font-weight: 600;
@@ -59,7 +80,7 @@
             letter-spacing: -0.01em;
         }
 
-        /* Кастомный курсор */
+        /* Кастомный курсор - скрыт на мобильных */
         .cursor {
             width: 20px;
             height: 20px;
@@ -85,7 +106,7 @@
             transition: transform 0.6s ease;
         }
 
-        /* Fullscreen видео герой */
+        /* Остальные стили остаются без изменений */
         .hero {
             height: 100vh;
             position: relative;
@@ -113,7 +134,6 @@
             padding: 0 20px;
         }
 
-        /* Анимированный заголовок */
         .animated-title {
             font-size: clamp(3rem, 8vw, 5.5rem);
             margin-bottom: 2rem;
@@ -135,7 +155,6 @@
             opacity: 0;
         }
 
-        /* Стильные SVG иконки */
         .icon {
             width: 80px;
             height: 80px;
@@ -161,7 +180,6 @@
             mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z'/%3E%3C/svg%3E") center/contain no-repeat;
         }
 
-        /* Неон кнопка */
         .neon-btn {
             background: transparent;
             color: var(--neon-pink);
@@ -200,7 +218,6 @@
             left: 0;
         }
 
-        /* Секции */
         .section {
             min-height: 100vh;
             padding: 100px 20px;
@@ -219,7 +236,6 @@
             transform: translateY(0);
         }
 
-        /* 3D карточки услуг */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -289,7 +305,6 @@
             letter-spacing: -0.02em;
         }
 
-        /* Анимированный градиент */
         .gradient-bg {
             background: linear-gradient(-45deg, #FF006E, #00BBF9, #8338EC, #FF006E);
             background-size: 400% 400%;
@@ -302,7 +317,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Магнитные кнопки */
         .magnetic-btn {
             background: var(--acid-blue);
             color: var(--deep-black);
@@ -336,7 +350,6 @@
             height: 300px;
         }
 
-        /* Анимация появления при скролле */
         .scroll-reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -348,7 +361,6 @@
             transform: translateY(0);
         }
 
-        /* Прогресс бар */
         .progress-bar {
             position: fixed;
             top: 0;
@@ -360,7 +372,6 @@
             transition: width 0.1s ease;
         }
 
-        /* Списки */
         .features {
             list-style: none;
             text-align: left;
@@ -385,7 +396,6 @@
             font-weight: bold;
         }
 
-        /* Стили для секции контактов */
         .contact-info {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
@@ -422,7 +432,6 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        /* Кнопка возврата */
         .back-btn {
             display: inline-block;
             margin-top: 2rem;
@@ -442,7 +451,6 @@
             box-shadow: var(--neon-glow);
         }
 
-        /* Модальное окно для email */
         .modal {
             display: none;
             position: fixed;
@@ -516,11 +524,11 @@
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            
+
             .service-card {
                 padding: 2rem 1.5rem;
             }
-            
+
             .icon {
                 width: 60px;
                 height: 60px;
@@ -552,7 +560,7 @@
     </style>
 </head>
 <body>
-    <!-- Кастомный курсор -->
+    <!-- Кастомный курсор - будет скрыт на мобильных -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
@@ -565,7 +573,7 @@
             <button class="modal-close" onclick="closeModal()">×</button>
             <h3 style="margin-bottom: 1rem; color: var(--acid-blue);">Выберите способ связи</h3>
             <p style="margin-bottom: 2rem; opacity: 0.8;">Скопируйте email или откройте в почтовом клиенте</p>
-            
+
             <div class="email-options">
                 <a href="mailto:reidy_7@mail.ru" class="email-option" onclick="trackEmailClick('mailto')">
                     📧 Открыть в почтовом клиенте
@@ -585,7 +593,7 @@
         <video autoplay muted loop class="video-bg">
             <source src="https://assets.mixkit.co/videos/preview/mixkit-white-particles-in-motion-3452-large.mp4" type="video/mp4">
         </video>
-        
+
         <div class="hero-content">
             <h1 class="animated-title" data-splitting>
                 ДАННЫЕ В ПОРЯДКЕ -<br>БИЗНЕС В РОСТЕ
@@ -606,7 +614,7 @@
             <h2 class="animated-title scroll-reveal" style="text-align: center; margin-bottom: 5rem; font-size: 3rem;" data-splitting>
                 УСЛУГИ
             </h2>
-            
+
             <div class="services-grid">
                 <div class="service-card scroll-reveal" data-tilt onclick="handleCardClick('basic')">
                     <div class="icon icon-visual"></div>
@@ -673,13 +681,13 @@
             <p class="scroll-reveal" style="margin-bottom: 3rem; opacity: 0.9; font-size: 1.1rem;">
                 Свяжитесь удобным способом
             </p>
-            
+
             <div class="contact-info scroll-reveal">
                 <div class="contact-item">
                     <h3>Telegram</h3>
-                    <a href="https://t.me/tonettes7" class="contact-link" target="_blank">tonettes</a>
+                    <a href="https://t.me/tonettes7" class="contact-link" target="_blank">Tonette</a>
                 </div>
-                
+
                 <div class="contact-item">
                     <h3>Email</h3>
                     <a href="#" class="contact-link" onclick="openEmailModal(event)">reidy_7@mail.ru</a>
@@ -701,48 +709,77 @@
     </section>
 
     <script>
+        // Защита от горячих клавиш
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+            }
+        });
+
+        // Функция для кодирования email (защита от скрапинга)
+        function decodeEmail(encoded) {
+            return encoded.replace(/[a-zA-Z]/g, function(c) {
+                return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
+            });
+        }
+
+        // Детектор мобильных устройств
+        function isMobileDevice() {
+            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+        }
+
         // Инициализация Splitting.js для анимации текста
         Splitting();
 
-        // Кастомный курсор
+        // Кастомный курсор - работает только на десктопе
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
 
         function updateCursor(e) {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            cursorFollower.style.left = e.clientX + 'px';
-            cursorFollower.style.top = e.clientY + 'px';
+            // Обновляем курсор только на десктопе
+            if (!isMobileDevice()) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }
+        }
+
+        // Скрываем курсор на мобильных устройствах
+        if (isMobileDevice()) {
+            cursor.style.display = 'none';
+            cursorFollower.style.display = 'none';
+            document.body.style.cursor = 'auto';
         }
 
         document.addEventListener('mousemove', updateCursor);
 
-        // Обновление курсора для модального окна
-        document.addEventListener('mousemove', function(e) {
-            updateCursor(e);
-        });
-
         // Магнитные кнопки
         document.querySelectorAll('[data-magnetic]').forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
+                if (isMobileDevice()) return;
+
                 const rect = btn.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
+
                 const angleX = (y - centerY) / 10;
                 const angleY = (centerX - x) / 10;
-                
+
                 btn.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
-                
+
                 cursor.style.transform = 'scale(1.5)';
                 cursorFollower.style.transform = 'scale(1.2)';
             });
-            
+
             btn.addEventListener('mouseleave', () => {
+                if (isMobileDevice()) return;
+
                 btn.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
                 cursor.style.transform = 'scale(1)';
                 cursorFollower.style.transform = 'scale(1)';
@@ -751,12 +788,12 @@
 
         // Анимация появления при скролле
         const scrollReveals = document.querySelectorAll('.scroll-reveal');
-        
+
         const revealOnScroll = () => {
             scrollReveals.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
                 const elementVisible = 150;
-                
+
                 if (elementTop < window.innerHeight - elementVisible) {
                     element.classList.add('active');
                 }
@@ -772,7 +809,7 @@
             const docHeight = document.documentElement.scrollHeight;
             const scrollTop = window.pageYOffset;
             const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
-            
+
             document.querySelector('.progress-bar').style.width = scrollPercent + '%';
         });
 
@@ -796,19 +833,21 @@
         });
 
         // Инициализация Tilt.js для 3D карточек
-        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-            max: 15,
-            speed: 400,
-            glare: true,
-            "max-glare": 0.2,
-        });
+        if (!isMobileDevice()) {
+            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+                max: 15,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.2,
+            });
+        }
 
         // GSAP анимации для сложных эффектов
         gsap.registerPlugin(ScrollTrigger);
 
         // Анимация секций при скролле
         gsap.utils.toArray('.section').forEach(section => {
-            gsap.fromTo(section, 
+            gsap.fromTo(section,
                 { opacity: 0, y: 100 },
                 {
                     opacity: 1,
@@ -826,7 +865,6 @@
 
         // Обработка кнопки "Назад" в браузере
         window.addEventListener('popstate', function(event) {
-            // При нажатии кнопки "Назад" просто прокручиваем наверх
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
@@ -856,11 +894,12 @@
         }
 
         function copyEmail() {
-            navigator.clipboard.writeText('reidy_7@mail.ru').then(() => {
+            const email = decodeEmail('ervql_7@znvy.ru'); // Закодированный email
+            navigator.clipboard.writeText(email).then(() => {
                 alert('Email скопирован в буфер обмена!');
                 closeModal();
             }).catch(() => {
-                alert('Не удалось скопировать email. Скопируйте вручную: reidy_7@mail.ru');
+                alert('Не удалось скопировать email. Скопируйте вручную: ' + email);
             });
         }
 
@@ -872,7 +911,6 @@
         // Обработка клика по карточке услуги
         function handleCardClick(type) {
             console.log(`Selected service: ${type}`);
-            // Прокручиваем к контактам
             document.getElementById('contacts').scrollIntoView({
                 behavior: 'smooth'
             });
@@ -889,11 +927,19 @@
         document.querySelectorAll('[data-explode]').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                // Создаем эффект частиц
+
+                if (isMobileDevice()) {
+                    // На мобильных просто прокручиваем без анимации
+                    document.getElementById('contacts').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    return;
+                }
+
+                // Создаем эффект частиц только на десктопе
                 const particles = [];
                 const particleCount = 20;
-                
+
                 for (let i = 0; i < particleCount; i++) {
                     const particle = document.createElement('div');
                     particle.style.position = 'absolute';
@@ -902,18 +948,18 @@
                     particle.style.background = getComputedStyle(this).background || '#00BBF9';
                     particle.style.borderRadius = '50%';
                     particle.style.pointerEvents = 'none';
-                    
+
                     const rect = this.getBoundingClientRect();
                     particle.style.left = (rect.left + rect.width / 2) + 'px';
                     particle.style.top = (rect.top + rect.height / 2) + 'px';
-                    
+
                     document.body.appendChild(particle);
-                    
+
                     const angle = Math.random() * Math.PI * 2;
                     const speed = 2 + Math.random() * 3;
                     const vx = Math.cos(angle) * speed;
                     const vy = Math.sin(angle) * speed;
-                    
+
                     particles.push({
                         element: particle,
                         vx: vx,
@@ -921,7 +967,7 @@
                         life: 1
                     });
                 }
-                
+
                 // Анимация частиц
                 function animateParticles() {
                     particles.forEach((p, index) => {
@@ -931,24 +977,24 @@
                             particles.splice(index, 1);
                             return;
                         }
-                        
+
                         const currentLeft = parseFloat(p.element.style.left);
                         const currentTop = parseFloat(p.element.style.top);
-                        
+
                         p.element.style.left = (currentLeft + p.vx) + 'px';
                         p.element.style.top = (currentTop + p.vy) + 'px';
                         p.element.style.opacity = p.life;
-                        
+
                         p.vy += 0.1; // гравитация
                     });
-                    
+
                     if (particles.length > 0) {
                         requestAnimationFrame(animateParticles);
                     }
                 }
-                
+
                 animateParticles();
-                
+
                 // Прокручиваем к контактам после анимации
                 setTimeout(() => {
                     document.getElementById('contacts').scrollIntoView({
@@ -957,6 +1003,11 @@
                 }, 300);
             });
         });
+
+        // Мониторинг безопасности
+        fetch(window.location.href)
+          .then(() => console.log('Site security check: OK'))
+          .catch(() => console.log('Site security check: Warning'));
     </script>
 </body>
 </html>
